@@ -10,6 +10,7 @@
 	<url>http://maven.apache.org</url>
 	<properties>
 		<java.version>1.8</java.version>
+		<taglibs.version>1.2.5</taglibs.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -40,6 +41,21 @@
 			<artifactId>spring-test</artifactId>
 			<version>5.1.3.RELEASE</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.spec</groupId>
+			<artifactId>jboss-javaee-all-8.0</artifactId>
+			<version>1.0.2.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.taglibs</groupId>
+			<artifactId>taglibs-standard-impl</artifactId>
+			<version>${taglibs.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.taglibs</groupId>
+			<artifactId>taglibs-standard-spec</artifactId>
+			<version>${taglibs.version}</version>
 		</dependency>
 	</dependencies>
 	<build>
