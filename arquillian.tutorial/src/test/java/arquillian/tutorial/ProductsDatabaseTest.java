@@ -18,7 +18,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 import arquillian.tutorial.database.ProductsDatabase;
 import arquillian.tutorial.entity.Products;
 
-public class ProductsDatabaseTest {
+public class ProductsDatabaseTest extends AbstractTestHelper {
 	
 	@Mock
 	private EntityManager entityManager;
@@ -52,7 +52,7 @@ public class ProductsDatabaseTest {
 	}
 	
 	@Test
-	public void testGetAllProductsWhenDBContainsOneProduct() {
+	public void testGetAllProductsWhenDBContainsTwoProducts() {
 		productsList.add(new Products("name1", "description1", "category1", 1.0));
 		productsList.add(new Products("name2", "description2", "category2", 2.0));
 		when(entityManager.createQuery(queryString)).thenReturn(query);
@@ -89,14 +89,6 @@ public class ProductsDatabaseTest {
 
 
 	}
-	
-	private void assertProduct(Products resultProduct, String name, String description, String category, double price,
-			int id) {
-		assertEquals(id, resultProduct.getId());
-		assertEquals(name, resultProduct.getName());
-		assertEquals(description, resultProduct.getDescription());
-		assertEquals(category, resultProduct.getCategory());
-		assertEquals(price, resultProduct.getPrice(), 0);
-	}
+
 
 }

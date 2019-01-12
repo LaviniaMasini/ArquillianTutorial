@@ -20,6 +20,10 @@ public class Products {
 		this.price = price;
 	}
 
+	public Products() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getName() {
 		return name;
 	}

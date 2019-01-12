@@ -16,7 +16,7 @@ import arquillian.tutorial.database.IProductsDatabase;
 import arquillian.tutorial.entity.Products;
 import arquillian.tutorial.service.ProductsService;
 
-public class ProductsServiceTest {
+public class ProductsServiceTest extends AbstractTestHelper {
 
 	@Mock
 	private IProductsDatabase productsDatabase;
@@ -73,15 +73,6 @@ public class ProductsServiceTest {
 		Products resultProduct = productsService.findProductById(id);
 		verify(productsDatabase, times(1)).getProductById(id);
 		assertProduct(resultProduct, name, description, category, price, id);
-	}
-
-	private void assertProduct(Products resultProduct, String name, String description, String category, double price,
-			int id) {
-		assertEquals(id, resultProduct.getId());
-		assertEquals(name, resultProduct.getName());
-		assertEquals(description, resultProduct.getDescription());
-		assertEquals(category, resultProduct.getCategory());
-		assertEquals(price, resultProduct.getPrice(), 0);
 	}
 
 }
