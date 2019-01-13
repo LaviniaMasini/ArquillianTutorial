@@ -1,4 +1,4 @@
-package arquillian.tutorial;
+package arquillian.tutorial.unit;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -18,6 +18,7 @@ import arquillian.tutorial.entity.Orders;
 import arquillian.tutorial.entity.Products;
 import arquillian.tutorial.entity.Users;
 import arquillian.tutorial.exception.DatabaseException;
+import arquillian.tutorial.helper.AbstractTestHelper;
 import arquillian.tutorial.service.OrdersService;
 
 public class OrdersServiceTest extends AbstractTestHelper {
