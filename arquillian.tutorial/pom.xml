@@ -9,6 +9,7 @@
 	<name>arquillian.tutorial Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
 		<taglibs.version>1.2.5</taglibs.version>
 		<jacoco.report.folder>${project.build.directory}/coverage-reports</jacoco.report.folder>
