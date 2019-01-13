@@ -1,4 +1,4 @@
-package arquillian.tutorial;
+package arquillian.tutorial.unit;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -17,6 +17,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 
 import arquillian.tutorial.database.ProductsDatabase;
 import arquillian.tutorial.entity.Products;
+import arquillian.tutorial.helper.AbstractTestHelper;
 
 public class ProductsDatabaseTest extends AbstractTestHelper {
 	
