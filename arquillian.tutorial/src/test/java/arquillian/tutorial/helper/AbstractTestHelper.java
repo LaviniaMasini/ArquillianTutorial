@@ -1,4 +1,4 @@
-package arquillian.tutorial;
+package arquillian.tutorial.helper;
 
 import static org.junit.Assert.assertEquals;
 
