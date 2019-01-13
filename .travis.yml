@@ -4,4 +4,4 @@ cache:
   directories:
   - $HOME/.m2
 script:
-- mvn -f arquillian.tutorial/pom.xml clean verify
+- mvn -f arquillian.tutorial/pom.xml clean verify -Pjacoco coveralls:report
