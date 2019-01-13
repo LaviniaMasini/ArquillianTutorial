@@ -11,6 +11,10 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<taglibs.version>1.2.5</taglibs.version>
+		<jacoco.report.folder>${project.build.directory}/coverage-reports</jacoco.report.folder>
+		<!-- Jacoco properties for Unit Tests -->
+		<jacoco.report.path>${project.reporting.outputDirectory}/jacoco-ut</jacoco.report.path>
+		<jacoco.data.file>${jacoco.report.folder}/jacoco.exec</jacoco.data.file>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -78,6 +82,9 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.0.0-M3</version>
+				<configuration>
+					<argLine>${surefireArgLine}</argLine>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.pitest</groupId>
@@ -90,7 +97,7 @@
 						<param>arquillian.tutorial.database*</param>
 					</targetClasses>
 					<targetTests>
-						<param>arquillian.tutorial*</param>
+						<param>arquillian.tutorial.unit*</param>
 					</targetTests>
 					<mutators>
 						<mutator>ALL</mutator>
@@ -99,4 +106,47 @@
 			</plugin>
 		</plugins>
 	</build>
+	<profiles>
+		<profile>
+			<id>jacoco</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.jacoco</groupId>
+						<artifactId>jacoco-maven-plugin</artifactId>
+						<version>0.7.8</version>
+						<configuration>
+						</configuration>
+						<executions>
+							<!-- Unit tests -->
+							<execution>
+								<id>jacoco-pre-unit-test</id>
+								<goals>
+									<goal>prepare-agent</goal>
+								</goals>
+								<configuration>
+									<destFile>${jacoco.data.file}</destFile>
+									<propertyName>surefireArgLine</propertyName>
+								</configuration>
+							</execution>
+							<execution>
+								<id>jacoco-post-unit-test</id>
+								<phase>test</phase>
+								<goals>
+									<goal>report</goal>
+								</goals>
+								<configuration>
+									<dataFile>${jacoco.data.file}</dataFile>
+									<outputDirectory>${jacoco.report.path}</outputDirectory>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
