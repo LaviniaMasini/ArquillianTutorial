@@ -1,5 +1,10 @@
 language: java
 jdk: oraclejdk8
+addons:
+  sonarcloud:
+    organization: laviniamasini-github
+    token:
+      secure: JjZATy4LxZiGwhhoJi3Ig30mGt76+f9MI2Kj9muvCie7zjYi5GJe2ISWGi5J6uTdOE6kwUTlCUvK87XwazwuJvBmiRdO+PwF0jYChz7LPDqYBDyYkkX2LMmYSlunWkFskuwBrudgiHdXHIcImnGKbDVMCsNc+jcQiYcW7EbaS6nK7n+M1gXhskvfmp2BVIMTUwySJxb9ahYoNE4b6o1GWdftxPCkRQEdIbkUaLw7VMEAqrno6Z7b1yID+kL/e/MlPNPStqGPgE0+JsUKmTcUJfVdG8GbhfDa96gwJIqGSkuZWTK92Ck8F3vJYYN8oOo0w33hLL397QIBKZ340GjQkW1Y9XypJ11gHBY8SROcLijosTISS5uysmeEIiAYFv6u/JX/Re1gN9RieAyjxIfJ+o1DV1vzsPiuc/pSi+OLCe/ENwTyIkxTUMccUA0EV8RSZUC0NPL+vSBL3Y6znHJpbWOHHDeMziamstfzHWG44hETyfNCpgRcOkIaVN9nWpM24tUp6lGklXmAPi39q3I+fybQ+Cj0seVgPj75F47Vzgh3iVeIZPbvHUyBUy1KOD/fmpY4XtQTKW8UP1R0CuQCOu1i7PcKhVNeD442mE/QONwdn7/qoqBP2cbXnQ0qXllpCQe3FQthTE+6w4/G8dIlJM/zYK5dYBeoUWVSu73S6eM=
 env:
   global:
   - WF_VERSION="14.0.1.Final"
@@ -13,3 +18,4 @@ before_script:
 - bash scripts/script.sh
 script:
 - mvn -f arquillian.tutorial/pom.xml clean verify -Parquillian-wildfly-managed,jacoco coveralls:report
+- mvn -f arquillian.tutorial/pom.xml clean verify -Parquillian-wildfly-managed,jacoco sonar:sonar
