@@ -1,19 +1,42 @@
 package arquillian.tutorial.entity;
 
-public class Users {
+import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
+@Entity
+@Table(name = "Users", uniqueConstraints = @UniqueConstraint(columnNames = { "username", "password" }))
+public class Users implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private int id;
 
+	@Column(name = "firstname")
 	private String firstname;
 
+	@Column(name = "lastname")
 	private String lastname;
 
+	@Column(name = "address")
 	private String address;
 
+	@Column(name = "email")
 	private String email;
 
+	@Column(name = "username", updatable = false)
 	private String username;
 
+	@Column(name = "password", updatable = false)
 	private String password;
 
 	public Users(String firstname, String lastname, String address, String email, String username, String password) {
@@ -80,7 +103,6 @@ public class Users {
 	public int getId() {
 		return id;
 	}
-	
-	
 
 }
+
