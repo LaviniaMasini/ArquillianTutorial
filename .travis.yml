@@ -1,7 +1,15 @@
 language: java
 jdk: oraclejdk8
+env:
+  global:
+  - WF_VERSION="14.0.1.Final"
+  - JBOSS_HOME=$HOME/wildfly-$WF_VERSION
+  - WF_LINK="http://download.jboss.org/wildfly/$WF_VERSION/wildfly-$WF_VERSION.tar.gz"
 cache:
   directories:
   - $HOME/.m2
+  - $JBOSS_HOME
+before_script:
+- bash scripts/script.sh
 script:
 - mvn -f arquillian.tutorial/pom.xml clean verify -Pjacoco coveralls:report
