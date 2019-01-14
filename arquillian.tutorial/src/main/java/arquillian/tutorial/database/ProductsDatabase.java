@@ -2,13 +2,17 @@ package arquillian.tutorial.database;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import arquillian.tutorial.entity.Products;
 
+@Stateless
 public class ProductsDatabase implements IProductsDatabase {
 
+	@PersistenceContext(name = "arquillian.tutorial")
 	private EntityManager entityManager;
 
 	public void setEntityManager(EntityManager entityManager) {
