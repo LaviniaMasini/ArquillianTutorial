@@ -1,5 +1,6 @@
 language: java
 jdk: oraclejdk8
+install: true
 addons:
   sonarcloud:
     organization: laviniamasini-github
@@ -14,6 +15,7 @@ cache:
   directories:
   - $HOME/.m2
   - $JBOSS_HOME
+   - $HOME/.sonar/cache
 before_script:
 - bash scripts/script.sh
 script:
