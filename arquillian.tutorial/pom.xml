@@ -2,10 +2,10 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>tutorial</groupId>
-	<artifactId>arquillian.tutorial</artifactId>
-	<packaging>war</packaging>
+	<groupId>com.tutorial</groupId>
+	<artifactId>arquillian-tutorial</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 	<name>arquillian.tutorial Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<properties>
@@ -16,6 +16,9 @@
 		<!-- Jacoco properties for Unit Tests -->
 		<jacoco.report.path>${project.reporting.outputDirectory}/jacoco-ut</jacoco.report.path>
 		<jacoco.data.file>${jacoco.report.folder}/jacoco.exec</jacoco.data.file>
+		<!-- Sonar coverage -->
+		<sonar.language>java</sonar.language>
+		<sonar.jacoco.reportPaths>${jacoco.data.file}</sonar.jacoco.reportPaths>
 	</properties>
 	<dependencies>
 		<dependency>
