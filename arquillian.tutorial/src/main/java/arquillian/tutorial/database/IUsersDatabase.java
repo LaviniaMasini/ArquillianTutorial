@@ -2,9 +2,13 @@ package arquillian.tutorial.database;
 
 import java.util.List;
 
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+
 import arquillian.tutorial.entity.Users;
 import arquillian.tutorial.exception.DatabaseException;
 
+@TransactionAttribute(TransactionAttributeType.REQUIRED)
 public interface IUsersDatabase {
 
 	List<Users> getAllUsers();

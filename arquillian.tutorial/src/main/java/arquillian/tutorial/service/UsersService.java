@@ -2,18 +2,23 @@ package arquillian.tutorial.service;
 
 import java.util.List;
 
+import javax.ejb.EJB;
+import javax.enterprise.inject.Model;
+
 import org.apache.log4j.Logger;
 
 import arquillian.tutorial.database.IUsersDatabase;
 import arquillian.tutorial.entity.Users;
 import arquillian.tutorial.exception.DatabaseException;
 
+@Model
 public class UsersService {
 
 	private IUsersDatabase usersDatabase;
 
 	private static final Logger LOGGER = Logger.getLogger(UsersService.class);
 
+	@EJB
 	public void setUsersService(IUsersDatabase usersDatabase) {
 		this.usersDatabase = usersDatabase;
 	}
