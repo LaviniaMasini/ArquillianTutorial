@@ -1,15 +1,36 @@
 package arquillian.tutorial.entity;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Orders {
-	
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Orders")
+public class Orders implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
+	@Column(name = "orderDate")
 	private LocalDate orderDate;
 
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "products_id")
 	private Products product;
 
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "users_id")
 	private Users user;
 
 	public Orders(LocalDate orderDate, Products product, Users user) {
@@ -26,30 +47,16 @@ public class Orders {
 		return orderDate;
 	}
 
-	public void setOrderDate(LocalDate orderDate) {
-		this.orderDate = orderDate;
-	}
-
 	public Products getProduct() {
 		return product;
-	}
-
-	public void setProduct(Products product) {
-		this.product = product;
 	}
 
 	public Users getUser() {
 		return user;
 	}
 
-	public void setUser(Users user) {
-		this.user = user;
-	}
-
 	public int getId() {
 		return id;
 	}
-	
-	
 
 }
