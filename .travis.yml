@@ -12,4 +12,4 @@ cache:
 before_script:
 - bash scripts/script.sh
 script:
-- mvn -f arquillian.tutorial/pom.xml clean verify -Pjacoco coveralls:report
+- mvn -f arquillian.tutorial/pom.xml clean verify -Parquillian-wildfly-managed,jacoco coveralls:report
