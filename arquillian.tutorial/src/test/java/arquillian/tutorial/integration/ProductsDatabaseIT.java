@@ -2,16 +2,12 @@ package arquillian.tutorial.integration;
 
 import static org.junit.Assert.*;
 
-import javax.annotation.Resource;
 import javax.ejb.EJB;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.transaction.HeuristicMixedException;
 import javax.transaction.HeuristicRollbackException;
 import javax.transaction.NotSupportedException;
 import javax.transaction.RollbackException;
 import javax.transaction.SystemException;
-import javax.transaction.UserTransaction;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -27,23 +23,18 @@ import arquillian.tutorial.database.IProductsDatabase;
 import arquillian.tutorial.database.ProductsDatabase;
 import arquillian.tutorial.entity.Products;
 import arquillian.tutorial.exception.DatabaseException;
+import arquillian.tutorial.helper.AbstractTestHelper;
 
 @RunWith(Arquillian.class)
-public class ProductsDatabaseIT {
+public class ProductsDatabaseIT extends AbstractTestHelper{
 
 	@EJB
 	private IProductsDatabase productsDatabase;
 
-	@PersistenceContext(name = "arquillian.tutorial")
-	private EntityManager entityManager;
-
-	@Resource
-	private UserTransaction userTx;
-
 	@Deployment
 	public static Archive<?> createDeployment() {
 		return ShrinkWrap.create(WebArchive.class, "ProductsDatabaseIT.war")
-				.addPackage(ProductsDatabase.class.getPackage()).addClass(DatabaseException.class)
+				.addPackage(ProductsDatabase.class.getPackage()).addClass(DatabaseException.class).addClass(AbstractTestHelper.class)
 				.addPackage(Products.class.getPackage()).addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
 				.addAsResource("scripts/import.sql").addAsResource("test-persistence.xml", "META-INF/persistence.xml");
 	}

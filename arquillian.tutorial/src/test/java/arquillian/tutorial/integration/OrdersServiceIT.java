@@ -6,8 +6,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -24,21 +22,19 @@ import arquillian.tutorial.entity.Orders;
 import arquillian.tutorial.entity.Products;
 import arquillian.tutorial.entity.Users;
 import arquillian.tutorial.exception.DatabaseException;
+import arquillian.tutorial.helper.AbstractTestHelper;
 import arquillian.tutorial.service.OrdersService;
 
 @RunWith(Arquillian.class)
-public class OrdersServiceIT {
+public class OrdersServiceIT extends AbstractTestHelper{
 
 	@Inject
 	private OrdersService ordersService;
 
-	@PersistenceContext(name = "arquillian.tutorial")
-	private EntityManager entityManager;
-
 	@Deployment
 	public static Archive<?> createDeployment() {
 		return ShrinkWrap.create(WebArchive.class, "OrdersServiceIT.war").addPackage(OrdersDatabase.class.getPackage())
-				.addClass(DatabaseException.class).addPackage(Orders.class.getPackage())
+				.addClass(DatabaseException.class).addPackage(Orders.class.getPackage()).addClass(AbstractTestHelper.class)
 				.addPackage(OrdersService.class.getPackage()).addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
 				.addAsResource("scripts/import.sql").addAsResource("test-persistence.xml", "META-INF/persistence.xml");
 	}

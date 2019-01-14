@@ -4,6 +4,11 @@ import static org.junit.Assert.assertEquals;
 
 import java.time.LocalDate;
 
+import javax.annotation.Resource;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.UserTransaction;
+
 import arquillian.tutorial.entity.Orders;
 import arquillian.tutorial.entity.Products;
 import arquillian.tutorial.entity.Users;
@@ -13,6 +18,12 @@ public class AbstractTestHelper {
 	public AbstractTestHelper() {
 		super();
 	}
+	
+	@PersistenceContext(name = "arquillian.tutorial")
+	protected EntityManager entityManager;
+	
+	@Resource
+	protected UserTransaction userTx;
 
 	protected void assertOrder(Orders resultOrder, Products p, LocalDate date, Users u, int id) {
 		assertEquals(id, resultOrder.getId());

@@ -3,8 +3,6 @@ package arquillian.tutorial.integration;
 import static org.junit.Assert.*;
 
 import javax.ejb.EJB;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -27,9 +25,6 @@ public class UsersDatabaseIT extends AbstractTestHelper {
 
 	@EJB
 	private IUsersDatabase usersDatabase;
-
-	@PersistenceContext(name = "arquillian.tutorial")
-	private EntityManager entityManager;
 
 	@Deployment
 	public static Archive<?> createDeployment() {

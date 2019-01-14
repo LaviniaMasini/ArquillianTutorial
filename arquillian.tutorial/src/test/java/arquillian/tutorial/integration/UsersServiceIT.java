@@ -5,8 +5,6 @@ import static org.junit.Assert.*;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -29,9 +27,6 @@ public class UsersServiceIT extends AbstractTestHelper {
 
 	@Inject
 	private UsersService usersService;
-
-	@PersistenceContext(name = "arquillian.tutorial")
-	private EntityManager entityManager;
 
 	@Deployment
 	public static Archive<?> createDeployment() {
