@@ -81,9 +81,7 @@ public class UsersDatabaseIT extends AbstractTestHelper {
 	@InSequence(6)
 	public void testAddUserWhenUsernameAndPasswordAreAlreadyPresent() throws DatabaseException {
 		Users u1 = entityManager.find(Users.class, 1);
-		Users u = new Users();
-		u.setUsername(u1.getUsername());
-		u.setPassword(u1.getPassword());
+		Users u = new Users("firstname", "lastname", "address", "email", u1.getUsername(), u1.getPassword());
 		usersDatabase.add(u);
 	}
 
@@ -95,8 +93,6 @@ public class UsersDatabaseIT extends AbstractTestHelper {
 		u.setLastname("lastnameUpd");
 		u.setAddress("addressUpd");
 		u.setEmail("emailUpd");
-		u.setUsername("usernameUpd");
-		u.setPassword("passwordUpd");
 		usersDatabase.update(u);
 		Users result = entityManager.find(Users.class, 1);
 		assertUser(result, 1, "firstnameUpd", "lastnameUpd", "addressUpd", "emailUpd", "username1", "password1");

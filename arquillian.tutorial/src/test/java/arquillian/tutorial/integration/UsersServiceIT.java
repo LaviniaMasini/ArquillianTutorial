@@ -89,14 +89,10 @@ public class UsersServiceIT extends AbstractTestHelper {
 		String lastname = "lastname2";
 		String address = "address2";
 		String email = "email2";
-		String username = "username2";
-		String password = "password2";
 		u.setFirstname(firstname);
 		u.setLastname(lastname);
 		u.setAddress(address);
 		u.setEmail(email);
-		u.setUsername(username);
-		u.setPassword(password);
 		assertTrue(usersService.updateUser(u));
 		assertUser(entityManager.find(Users.class, 1), 1, firstname, lastname, address, email, "username1", "password1");
 		
