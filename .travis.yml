@@ -17,7 +17,8 @@ env:
 cache:
   directories:
   - $HOME/.m2
-  - $JBOSS_HOME - $HOME/.sonar/cache
+  - $JBOSS_HOME 
+  - $HOME/.sonar/cache
 before_script:
 - bash scripts/script.sh
 script:
