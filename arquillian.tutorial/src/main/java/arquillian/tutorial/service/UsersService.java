@@ -57,7 +57,7 @@ public class UsersService {
 		try {
 			return usersDatabase.getUserByUsernameAndPassword(username, password);
 		} catch (DatabaseException e) {
-			LOGGER.info("The user is not present");
+			LOGGER.info("The user is not present: " + e);
 			return null;
 
 		}
