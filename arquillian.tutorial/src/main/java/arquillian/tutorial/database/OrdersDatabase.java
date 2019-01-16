@@ -3,23 +3,14 @@ package arquillian.tutorial.database;
 import java.util.List;
 
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import arquillian.tutorial.entity.Orders;
 import arquillian.tutorial.exception.DatabaseException;
 
 @Stateless
-public class OrdersDatabase implements IOrdersDatabase {
+public class OrdersDatabase extends AbstractDatabase implements IOrdersDatabase {
 	
-	@PersistenceContext(name = "arquillian.tutorial")
-	private EntityManager entityManager;
-
-	public void setEntityManager(EntityManager entityManager) {
-		this.entityManager = entityManager; 
-	}
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Orders> getAllOrders() {

@@ -3,23 +3,13 @@ package arquillian.tutorial.database;
 import java.util.List;
 
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import arquillian.tutorial.entity.Users;
 import arquillian.tutorial.exception.DatabaseException;
 
 @Stateless
-public class UsersDatabase implements IUsersDatabase {
-
-	@PersistenceContext(name = "arquillian.tutorial")
-	private EntityManager entityManager;
-
-	public void setEntityManager(EntityManager entityManager) {
-		this.entityManager = entityManager;
-
-	}
+public class UsersDatabase extends AbstractDatabase implements IUsersDatabase {
 
 	@SuppressWarnings("unchecked")
 	@Override
