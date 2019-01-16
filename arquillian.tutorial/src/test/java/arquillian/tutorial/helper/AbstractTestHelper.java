@@ -7,6 +7,11 @@ import java.time.LocalDate;
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.HeuristicMixedException;
+import javax.transaction.HeuristicRollbackException;
+import javax.transaction.NotSupportedException;
+import javax.transaction.RollbackException;
+import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
 import arquillian.tutorial.entity.Orders;
@@ -18,10 +23,10 @@ public class AbstractTestHelper {
 	public AbstractTestHelper() {
 		super();
 	}
-	
+
 	@PersistenceContext(name = "arquillian.tutorial")
 	protected EntityManager entityManager;
-	
+
 	@Resource
 	protected UserTransaction userTx;
 
@@ -56,6 +61,14 @@ public class AbstractTestHelper {
 		assertEquals(username, resultUser.getUsername());
 		assertEquals(password, resultUser.getPassword());
 
+	}
+
+	protected void removeProduct(Products p) throws NotSupportedException, SystemException, RollbackException,
+			HeuristicMixedException, HeuristicRollbackException {
+		userTx.begin();
+		p = entityManager.merge(p);
+		entityManager.remove(p);
+		userTx.commit();
 	}
 
 }

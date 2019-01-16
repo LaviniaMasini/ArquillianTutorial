@@ -81,7 +81,7 @@ public class OrdersServiceIT extends AbstractTestHelper{
 	@Test
 	@InSequence(6)
 	public void testRemoveOrderWhenItIsOk() throws DatabaseException {
-		Orders o = ordersService.findOrderById(1);
+		Orders o = entityManager.find(Orders.class, 1);
 		assertTrue(ordersService.removeOrder(o));
 		assertEquals(0, entityManager.createQuery("select o from Orders o").getResultList().size());
 

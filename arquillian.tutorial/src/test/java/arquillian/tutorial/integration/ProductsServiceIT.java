@@ -69,12 +69,4 @@ public class ProductsServiceIT extends AbstractTestHelper{
 
 	}
 
-	private void removeProduct(Products p) throws NotSupportedException, SystemException, RollbackException,
-			HeuristicMixedException, HeuristicRollbackException {
-		userTx.begin();
-		p = entityManager.merge(p);
-		entityManager.remove(p);
-		userTx.commit();
-	}
-
 }
