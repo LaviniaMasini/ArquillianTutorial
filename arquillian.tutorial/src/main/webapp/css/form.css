@@ -1,0 +1,48 @@
+.form {
+	width: 390px;
+	margin: 0 auto;
+	min-height: 70vh;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background: #fff;
+	border-radius: 10px;
+	position: relative;
+}
+
+.title {
+	font-size: 30px;
+	text-align: center;
+	width: 100%;
+	display: block;
+}
+
+.input {
+	width: 100%;
+	position: relative;
+	background-color: #e6e6e6;
+	border: 1px solid transparent;
+	border-radius: 3px;
+}
+
+.loginBtn {
+	width: 100%;
+}
+
+.newUser {
+	text-align: center;
+	margin: 0 auto;
+	text-decoration: none;
+}
+
+.error {
+	color: red;
+}
