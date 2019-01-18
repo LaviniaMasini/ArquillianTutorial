@@ -1,0 +1,40 @@
+.buttonLeft {
+	border: none;
+	color: white;
+	background-color: #333;
+	text-align: center;
+	text-decoration: none;
+	padding: 20px 32px;
+	display: inline-block;
+	position: absolute;
+	width: 160px;
+	height: 70px;
+	top: 20%;
+	left: 30%;
+	margin-right: -50%;
+	transform: translate(-50%, -50%);
+	height: 50px;
+}
+
+.buttonRight {
+	border: none;
+	color: white;
+	background-color: #333;
+	text-align: center;
+	text-decoration: none;
+	padding: 20px 32px;
+	display: inline-block;
+	position: absolute;
+	width: 160px;
+	height: 70px;
+	top: 20%;
+	left: 70%;
+	margin-right: -50%;
+	transform: translate(-50%, -50%);
+	height: 50px;
+}
+
+}
+.button:hover {
+	background: #ddd;
+}
