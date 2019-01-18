@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@page import="java.util.List"%>
-<!DOCTYPE html>
+	pageEncoding="UTF-8"%><!DOCTYPE html>
 <html>
 <head>
 <title>menu</title>
@@ -21,11 +19,9 @@
 	text-align: left;
 }
 
-
 .button:hover {
-background: #ddd;
+	background: #ddd;
 }
-
 </style>
 
 </head>
@@ -33,7 +29,7 @@ background: #ddd;
 
 	<div class="navbar">
 		<a id="homeBtn" href="homepage">Home</a>
-		
+
 		<%
 			if (session.getAttribute("username") == null) {
 		%>
