@@ -39,8 +39,10 @@ public class LoginServletTest extends AbstractServletTestHelper {
 	public void testDoPostWithUser() throws ServletException, IOException {
 		String username = "username1";
 		String password = "password1";
-		setSession(username, password);
+		when(request.getParameter("username")).thenReturn(username);
+		when(request.getParameter("password")).thenReturn(password);
 		when(usersService.findUserByUsernameAndPassword(username, password)).thenReturn(new Users());
+		when(request.getSession()).thenReturn(session);
 		when(request.getRequestDispatcher("userSummary.jsp")).thenReturn(requestDispatcher);
 		new LoginServlet(usersService).doPost(request, response);
 		verify(session).setAttribute("username", username);
