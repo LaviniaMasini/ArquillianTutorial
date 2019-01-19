@@ -1,21 +1,19 @@
 package arquillian.tutorial.servlet;
 
+import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.*;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentMatcher;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import arquillian.tutorial.entity.Orders;
@@ -25,7 +23,7 @@ import arquillian.tutorial.service.OrdersService;
 import arquillian.tutorial.service.ProductsService;
 import arquillian.tutorial.service.UsersService;
 
-public class HomePageServletTest {
+public class HomePageServletTest extends AbstractServletTestHelper {
 
 	@Mock
 	private ProductsService productsService;
@@ -36,22 +34,6 @@ public class HomePageServletTest {
 	@Mock
 	private OrdersService ordersService;
 
-	@Mock
-	private HttpServletRequest request;
-
-	@Mock
-	private HttpServletResponse response;
-
-	@Mock
-	private RequestDispatcher requestDispatcher;
-
-	@Mock
-	private HttpSession session;
-
-	@Before
-	public void setUp() throws Exception {
-		MockitoAnnotations.initMocks(this);
-	}
 
 	@Test
 	public void testDoGet() throws ServletException, IOException {
@@ -79,10 +61,17 @@ public class HomePageServletTest {
 		String username = "username";
 		String password = "password";
 		setSession(username, password);
-		setProduct("1", "name1", "description1", "category1", 1.0);
+		Products p = setProductAttribute();
 		Users u = new Users("firstname", "lastname", "address", "email@email.com", username, password);
 		when(usersService.findUserByUsernameAndPassword(username, password)).thenReturn(u);
-		when(ordersService.addOrder(any(Orders.class))).thenReturn(true);
+		when(ordersService.addOrder(argThat(new ArgumentMatcher<Orders>() {
+			@Override
+			public boolean matches(Orders argument) {
+				Orders orders = argument;
+				return orders.getOrderDate().equals(LocalDate.now()) && orders.getProduct().equals(p)
+						&& orders.getUser().equals(u);
+			}
+		}))).thenReturn(true);
 		when(request.getRequestDispatcher("orderReview.jsp")).thenReturn(requestDispatcher);
 		new HomePageServlet(productsService, usersService, ordersService).doPost(request, response);
 		verify(productsService).findProductById(1);
@@ -98,7 +87,7 @@ public class HomePageServletTest {
 		String username = "username";
 		String password = "password";
 		setSession(username, password);
-		setProduct("1", "name1", "description1", "category1", 1.0);
+		setProductAttribute();
 		Users u = new Users("firstname", "lastname", "address", "email@email.com", username, password);
 		when(usersService.findUserByUsernameAndPassword(username, password)).thenReturn(u);
 		when(ordersService.addOrder(any(Orders.class))).thenReturn(false);
@@ -122,27 +111,15 @@ public class HomePageServletTest {
 		verify(request).setAttribute("price", price);
 	}
 
-	private void verifySetUserAttributes(HttpServletRequest request, String firstname, String lastname, String address,
-			String email) {
-		verify(request).setAttribute("firstname", firstname);
-		verify(request).setAttribute("lastname", lastname);
-		verify(request).setAttribute("address", address);
-		verify(request).setAttribute("email", email);
-
-	}
 	
-	private void setSession(String username, String password) {
-		when(request.getSession()).thenReturn(session);
-		when(session.getAttribute("username")).thenReturn(username);
-		when(session.getAttribute("password")).thenReturn(password);
-	}
-	
-	private void setProduct(String idStr, String name, String description, String category, double price) {
+	private Products setProductAttribute() {
+		Products p = new Products("name1", "description1", "category1", 1.0);
+		String idStr = "1";
 		when(request.getParameter("id")).thenReturn(idStr);
-		Products p = new Products(name, description, category, price);
 		ReflectionTestUtils.setField(p, "id", 1);
 		int id = Integer.parseInt(idStr);
 		when(productsService.findProductById(id)).thenReturn(p);
+		return p;
 	}
 
 }

@@ -5,41 +5,18 @@ import static org.mockito.Mockito.*;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 import arquillian.tutorial.entity.Users;
 import arquillian.tutorial.service.UsersService;
 
-public class CredentialsServletTest {
+public class CredentialsServletTest extends AbstractServletTestHelper {
 
 	@Mock
 	private UsersService usersService;
-
-	@Mock
-	private HttpServletRequest request;
-
-	@Mock
-	private HttpServletResponse response;
-
-	@Mock
-	private RequestDispatcher requestDispatcher;
-
-	@Mock
-	private HttpSession session;
-
-	@Before
-	public void setUp() throws Exception {
-		MockitoAnnotations.initMocks(this);
-	}
 
 	@Test
 	public void testDoGetWhenSessionIsNotNull() throws ServletException, IOException {
@@ -49,10 +26,8 @@ public class CredentialsServletTest {
 		String lastname = "lastname1";
 		String address = "address1";
 		String email = "email@email.com";
-		when(request.getSession()).thenReturn(session);
 		when(request.getRequestDispatcher("userInfo.jsp")).thenReturn(requestDispatcher);
-		when(session.getAttribute("username")).thenReturn(username);
-		when(session.getAttribute("password")).thenReturn(password);
+		setSession(username, password);
 		Users u = new Users(firstname, lastname, address, email, username, password);
 		when(usersService.findUserByUsernameAndPassword(username, password)).thenReturn(u);
 		new CredentialsServlet(usersService).doGet(request, response);
@@ -80,9 +55,7 @@ public class CredentialsServletTest {
 		String address = "address1";
 		String email = "email@email.com";
 		Users u = spy(new Users("firstname", "lastname", "address", "email", username, password));
-		when(request.getSession()).thenReturn(session);
-		when(session.getAttribute("username")).thenReturn(username);
-		when(session.getAttribute("password")).thenReturn(password);
+		setSession(username, password);
 		when(request.getParameter("firstname")).thenReturn(firstname);
 		when(request.getParameter("lastname")).thenReturn(lastname);
 		when(request.getParameter("address")).thenReturn(address);
@@ -91,23 +64,18 @@ public class CredentialsServletTest {
 		when(usersService.findUserByUsernameAndPassword(username, password)).thenReturn(u);
 		when(usersService.updateUser(u)).thenReturn(true);
 		new CredentialsServlet(usersService).doPost(request, response);
-		assertEquals(u.getFirstname(), firstname);
-		assertEquals(u.getLastname(), lastname);
-		assertEquals(u.getAddress(), address);
-		assertEquals(u.getEmail(), email);
+		assertUser(firstname, lastname, address, email, u);
 		verify(usersService).findUserByUsernameAndPassword(username, password);
 		verify(usersService).updateUser(u);
 		verifySetUserAttributes(request, firstname, lastname, address, email);
 		verify(requestDispatcher).include(request, response);
 	}
 
-	private void verifySetUserAttributes(HttpServletRequest request, String firstname, String lastname, String address,
-			String email) {
-		verify(request).setAttribute("firstname", firstname);
-		verify(request).setAttribute("lastname", lastname);
-		verify(request).setAttribute("address", address);
-		verify(request).setAttribute("email", email);
-
+	private void assertUser(String firstname, String lastname, String address, String email, Users u) {
+		assertEquals(u.getFirstname(), firstname);
+		assertEquals(u.getLastname(), lastname);
+		assertEquals(u.getAddress(), address);
+		assertEquals(u.getEmail(), email);
 	}
 
 }
