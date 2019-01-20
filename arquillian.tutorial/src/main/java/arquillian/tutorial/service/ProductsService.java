@@ -12,11 +12,11 @@ public class ProductsService implements IProductsService {
 
 	@EJB
 	private IProductsDatabase productsDatabase;
-	
+
 	@Override
 	public void setProductsDatabase(IProductsDatabase productsDatabase) {
 		this.productsDatabase = productsDatabase;
-		
+
 	}
 
 	@Override

@@ -10,7 +10,7 @@ import arquillian.tutorial.exception.DatabaseException;
 
 @Stateless
 public class OrdersDatabase extends AbstractDatabase implements IOrdersDatabase {
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Orders> getAllOrders() {
@@ -26,21 +26,21 @@ public class OrdersDatabase extends AbstractDatabase implements IOrdersDatabase 
 	@Override
 	public void add(Orders order) throws DatabaseException {
 		try {
-			entityManager.persist(order);			
+			entityManager.persist(order);
 		} catch (Exception e) {
 			throw new DatabaseException(e);
 		}
-		
+
 	}
 
 	@Override
 	public void remove(Orders order) throws DatabaseException {
 		try {
-			entityManager.remove(getOrdersById(order.getId()));			
+			entityManager.remove(getOrdersById(order.getId()));
 		} catch (Exception e) {
 			throw new DatabaseException(e);
 		}
-		
+
 	}
 
 }
