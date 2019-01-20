@@ -11,12 +11,12 @@ import org.mockito.ArgumentMatcher;
 import org.mockito.Mock;
 
 import arquillian.tutorial.entity.Users;
-import arquillian.tutorial.service.UsersService;
+import arquillian.tutorial.service.IUsersService;
 
 public class NewUserServletTest extends AbstractServletTestHelper {
 
 	@Mock
-	private UsersService usersService;
+	private IUsersService usersService;
 
 
 	@Test

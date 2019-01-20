@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import arquillian.tutorial.entity.Users;
-import arquillian.tutorial.service.UsersService;
+import arquillian.tutorial.service.IUsersService;
 
 @WebServlet("/update_credentials")
 public class CredentialsServlet extends HttpServlet {
@@ -19,10 +19,10 @@ public class CredentialsServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	private final UsersService userService;
+	private final IUsersService userService;
 
 	@Inject
-	public CredentialsServlet(UsersService usersService) {
+	public CredentialsServlet(IUsersService usersService) {
 		super();
 		this.userService = usersService;
 	}

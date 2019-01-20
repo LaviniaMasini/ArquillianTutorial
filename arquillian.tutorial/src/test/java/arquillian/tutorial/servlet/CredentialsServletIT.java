@@ -21,6 +21,7 @@ import org.mockito.MockitoAnnotations;
 import arquillian.tutorial.database.IUsersDatabase;
 import arquillian.tutorial.entity.Users;
 import arquillian.tutorial.exception.DatabaseException;
+import arquillian.tutorial.service.IUsersService;
 import arquillian.tutorial.service.UsersService;
 
 public class CredentialsServletIT {
@@ -28,7 +29,7 @@ public class CredentialsServletIT {
 	@Mock
 	private IUsersDatabase usersDatabase;
 
-	private UsersService usersService;
+	private IUsersService usersService;
 
 	@Mock
 	private HttpServletRequest request;

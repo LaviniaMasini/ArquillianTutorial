@@ -11,11 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import arquillian.tutorial.entity.Users;
-import arquillian.tutorial.service.UsersService;
+import arquillian.tutorial.service.IUsersService;
 
-/**
- * Servlet implementation class NewUserServlet
- */
 @WebServlet("/registration")
 public class NewUserServlet extends HttpServlet {
 	private static final String ERROR_MESSAGE = "errorMessage";
@@ -26,10 +23,10 @@ public class NewUserServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	private final UsersService usersService;
+	private final IUsersService usersService;
 
 	@Inject
-	public NewUserServlet(UsersService usersService) {
+	public NewUserServlet(IUsersService usersService) {
 		super();
 		this.usersService = usersService;
 	}

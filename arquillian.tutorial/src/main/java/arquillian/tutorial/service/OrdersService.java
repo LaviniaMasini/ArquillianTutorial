@@ -12,25 +12,29 @@ import arquillian.tutorial.entity.Orders;
 import arquillian.tutorial.exception.DatabaseException;
 
 @Model
-public class OrdersService {
+public class OrdersService implements IOrdersService {
 
 	private IOrdersDatabase ordersDatabase;
 	
 	private static final Logger LOGGER = Logger.getLogger(OrdersService.class);
 
+	@Override
 	@EJB
 	public void setOrdersDatabase(IOrdersDatabase ordersDatabase) {
 		this.ordersDatabase = ordersDatabase;
 	}
 
+	@Override
 	public List<Orders> findAllOrders() {
 		return ordersDatabase.getAllOrders();
 	}
 
+	@Override
 	public Orders findOrderById(int id) {
 		return ordersDatabase.getOrdersById(id);
 	}
 
+	@Override
 	public boolean addOrder(Orders order) {
 		try {
 			ordersDatabase.add(order);
@@ -42,6 +46,7 @@ public class OrdersService {
 		return false;
 	}
 
+	@Override
 	public boolean removeOrder(Orders order) {
 		try {
 			ordersDatabase.remove(order);

@@ -10,12 +10,12 @@ import org.junit.Test;
 import org.mockito.Mock;
 
 import arquillian.tutorial.entity.Users;
-import arquillian.tutorial.service.UsersService;
+import arquillian.tutorial.service.IUsersService;
 
 public class LoginServletTest extends AbstractServletTestHelper {
 
 	@Mock
-	private UsersService usersService;
+	private IUsersService usersService;
 
 	@Test
 	public void testDoGetWithoutSession() throws ServletException, IOException {

@@ -16,6 +16,7 @@ import arquillian.tutorial.database.IUsersDatabase;
 import arquillian.tutorial.entity.Users;
 import arquillian.tutorial.exception.DatabaseException;
 import arquillian.tutorial.helper.AbstractTestHelper;
+import arquillian.tutorial.service.IUsersService;
 import arquillian.tutorial.service.UsersService;
 
 public class UsersServiceTest extends AbstractTestHelper {
@@ -23,7 +24,7 @@ public class UsersServiceTest extends AbstractTestHelper {
 	@Mock
 	private IUsersDatabase usersDatabase;
 
-	private UsersService usersService;
+	private IUsersService usersService;
 
 	private List<Users> usersList;
 

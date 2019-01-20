@@ -20,13 +20,14 @@ import arquillian.tutorial.database.UsersDatabase;
 import arquillian.tutorial.entity.Users;
 import arquillian.tutorial.exception.DatabaseException;
 import arquillian.tutorial.helper.AbstractTestHelper;
+import arquillian.tutorial.service.IUsersService;
 import arquillian.tutorial.service.UsersService;
 
 @RunWith(Arquillian.class)
 public class UsersServiceIT extends AbstractTestHelper {
 
 	@Inject
-	private UsersService usersService;
+	private IUsersService usersService;
 
 	@Deployment
 	public static Archive<?> createDeployment() {

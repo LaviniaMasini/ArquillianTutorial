@@ -15,6 +15,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 import arquillian.tutorial.database.IProductsDatabase;
 import arquillian.tutorial.entity.Products;
 import arquillian.tutorial.helper.AbstractTestHelper;
+import arquillian.tutorial.service.IProductsService;
 import arquillian.tutorial.service.ProductsService;
 
 public class ProductsServiceTest extends AbstractTestHelper {
@@ -22,7 +23,7 @@ public class ProductsServiceTest extends AbstractTestHelper {
 	@Mock
 	private IProductsDatabase productsDatabase;
 
-	private ProductsService productsService;
+	private IProductsService productsService;
 
 	private List<Products> productsList;
 

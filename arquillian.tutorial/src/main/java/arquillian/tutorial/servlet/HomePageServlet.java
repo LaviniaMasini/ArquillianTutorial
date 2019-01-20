@@ -15,22 +15,22 @@ import javax.servlet.http.HttpSession;
 import arquillian.tutorial.entity.Orders;
 import arquillian.tutorial.entity.Products;
 import arquillian.tutorial.entity.Users;
-import arquillian.tutorial.service.OrdersService;
-import arquillian.tutorial.service.ProductsService;
-import arquillian.tutorial.service.UsersService;
+import arquillian.tutorial.service.IOrdersService;
+import arquillian.tutorial.service.IProductsService;
+import arquillian.tutorial.service.IUsersService;
 
 @WebServlet(urlPatterns = { "/homepage", "" })
 public class HomePageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private final ProductsService productsService;
+	private final IProductsService productsService;
 
-	private final UsersService usersService;
+	private final IUsersService usersService;
 
-	private final OrdersService ordersService;
+	private final IOrdersService ordersService;
 
 	@Inject
-	public HomePageServlet(ProductsService productsService, UsersService usersService, OrdersService ordersService) {
+	public HomePageServlet(IProductsService productsService, IUsersService usersService, IOrdersService ordersService) {
 		super();
 		this.productsService = productsService;
 		this.usersService = usersService;

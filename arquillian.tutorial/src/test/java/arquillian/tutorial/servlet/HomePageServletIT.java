@@ -25,6 +25,9 @@ import arquillian.tutorial.entity.Orders;
 import arquillian.tutorial.entity.Products;
 import arquillian.tutorial.entity.Users;
 import arquillian.tutorial.exception.DatabaseException;
+import arquillian.tutorial.service.IOrdersService;
+import arquillian.tutorial.service.IProductsService;
+import arquillian.tutorial.service.IUsersService;
 import arquillian.tutorial.service.OrdersService;
 import arquillian.tutorial.service.ProductsService;
 import arquillian.tutorial.service.UsersService;
@@ -52,11 +55,11 @@ public class HomePageServletIT {
 	@Mock
 	private IOrdersDatabase ordersDatabase;
 
-	private UsersService usersService;
+	private IUsersService usersService;
 
-	private ProductsService productsService;
+	private IProductsService productsService;
 
-	private OrdersService ordersService;
+	private IOrdersService ordersService;
 
 	@Before
 	public void setUp() throws Exception {

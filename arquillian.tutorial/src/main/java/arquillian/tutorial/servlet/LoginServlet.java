@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import arquillian.tutorial.service.UsersService;
+import arquillian.tutorial.service.IUsersService;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -18,10 +18,10 @@ public class LoginServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	private final UsersService usersService;
+	private final IUsersService usersService;
 
 	@Inject
-	public LoginServlet(UsersService usersService) {
+	public LoginServlet(IUsersService usersService) {
 		super();
 		this.usersService = usersService;
 	}

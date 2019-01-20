@@ -23,13 +23,14 @@ import arquillian.tutorial.database.ProductsDatabase;
 import arquillian.tutorial.entity.Products;
 import arquillian.tutorial.exception.DatabaseException;
 import arquillian.tutorial.helper.AbstractTestHelper;
+import arquillian.tutorial.service.IProductsService;
 import arquillian.tutorial.service.ProductsService;
 
 @RunWith(Arquillian.class)
 public class ProductsServiceIT extends AbstractTestHelper{
 
 	@Inject
-	private ProductsService productsService;
+	private IProductsService productsService;
 
 	@Deployment
 	public static Archive<?> createDeployment() {

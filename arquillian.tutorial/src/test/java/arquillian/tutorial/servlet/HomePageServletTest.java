@@ -19,20 +19,20 @@ import org.springframework.test.util.ReflectionTestUtils;
 import arquillian.tutorial.entity.Orders;
 import arquillian.tutorial.entity.Products;
 import arquillian.tutorial.entity.Users;
-import arquillian.tutorial.service.OrdersService;
-import arquillian.tutorial.service.ProductsService;
+import arquillian.tutorial.service.IOrdersService;
+import arquillian.tutorial.service.IProductsService;
 import arquillian.tutorial.service.UsersService;
 
 public class HomePageServletTest extends AbstractServletTestHelper {
 
 	@Mock
-	private ProductsService productsService;
+	private IProductsService productsService;
 
 	@Mock
 	private UsersService usersService;
 
 	@Mock
-	private OrdersService ordersService;
+	private IOrdersService ordersService;
 
 
 	@Test

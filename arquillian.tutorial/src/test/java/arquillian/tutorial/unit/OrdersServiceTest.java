@@ -19,6 +19,7 @@ import arquillian.tutorial.entity.Products;
 import arquillian.tutorial.entity.Users;
 import arquillian.tutorial.exception.DatabaseException;
 import arquillian.tutorial.helper.AbstractTestHelper;
+import arquillian.tutorial.service.IOrdersService;
 import arquillian.tutorial.service.OrdersService;
 
 public class OrdersServiceTest extends AbstractTestHelper {
@@ -26,7 +27,7 @@ public class OrdersServiceTest extends AbstractTestHelper {
 	@Mock
 	private IOrdersDatabase ordersDatabase;
 
-	private OrdersService ordersService;
+	private IOrdersService ordersService;
 
 	private List<Orders> ordersList;
 
