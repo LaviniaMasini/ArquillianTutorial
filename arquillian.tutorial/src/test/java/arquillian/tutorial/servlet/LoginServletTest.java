@@ -6,16 +6,24 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import arquillian.tutorial.entity.Users;
+import arquillian.tutorial.helper.AbstractServletTestHelper;
 import arquillian.tutorial.service.IUsersService;
 
 public class LoginServletTest extends AbstractServletTestHelper {
 
 	@Mock
 	private IUsersService usersService;
+	
+	@Before
+	public void setUp() throws Exception {
+		MockitoAnnotations.initMocks(this);
+	}
 
 	@Test
 	public void testDoGetWithoutSession() throws ServletException, IOException {

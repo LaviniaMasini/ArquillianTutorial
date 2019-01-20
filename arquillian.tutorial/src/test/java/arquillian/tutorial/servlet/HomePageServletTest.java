@@ -11,14 +11,17 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentMatcher;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import arquillian.tutorial.entity.Orders;
 import arquillian.tutorial.entity.Products;
 import arquillian.tutorial.entity.Users;
+import arquillian.tutorial.helper.AbstractServletTestHelper;
 import arquillian.tutorial.service.IOrdersService;
 import arquillian.tutorial.service.IProductsService;
 import arquillian.tutorial.service.UsersService;
@@ -33,7 +36,11 @@ public class HomePageServletTest extends AbstractServletTestHelper {
 
 	@Mock
 	private IOrdersService ordersService;
-
+	
+	@Before
+	public void setUp() throws Exception {
+		MockitoAnnotations.initMocks(this);
+	}
 
 	@Test
 	public void testDoGet() throws ServletException, IOException {

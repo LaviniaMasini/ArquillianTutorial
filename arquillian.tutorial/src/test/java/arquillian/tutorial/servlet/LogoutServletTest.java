@@ -6,10 +6,19 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.MockitoAnnotations;
+
+import arquillian.tutorial.helper.AbstractServletTestHelper;
 
 
 public class LogoutServletTest extends AbstractServletTestHelper{
+	
+	@Before
+	public void setUp() throws Exception {
+		MockitoAnnotations.initMocks(this);
+	}
 
 	@Test
 	public void testDoGetWhenSessionIsNotNull() throws ServletException, IOException{

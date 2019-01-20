@@ -1,4 +1,4 @@
-package arquillian.tutorial.servlet;
+package arquillian.tutorial.helper;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -8,9 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.junit.Before;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 public class AbstractServletTestHelper {
 	
@@ -28,11 +26,6 @@ public class AbstractServletTestHelper {
 
 	public AbstractServletTestHelper() {
 		super();
-	}
-	
-	@Before
-	public void setUp() throws Exception {
-		MockitoAnnotations.initMocks(this);
 	}
 
 	protected void setSession(String username, String password) {

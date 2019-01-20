@@ -6,12 +6,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,27 +16,16 @@ import org.mockito.MockitoAnnotations;
 import arquillian.tutorial.database.IUsersDatabase;
 import arquillian.tutorial.entity.Users;
 import arquillian.tutorial.exception.DatabaseException;
+import arquillian.tutorial.helper.AbstractServletTestHelper;
 import arquillian.tutorial.service.IUsersService;
 import arquillian.tutorial.service.UsersService;
 
-public class CredentialsServletIT {
+public class CredentialsServletIT extends AbstractServletTestHelper {
 
 	@Mock
 	private IUsersDatabase usersDatabase;
 
 	private IUsersService usersService;
-
-	@Mock
-	private HttpServletRequest request;
-
-	@Mock
-	private HttpServletResponse response;
-
-	@Mock
-	private RequestDispatcher requestDispatcher;
-
-	@Mock
-	private HttpSession session;
 
 	@Before
 	public void setUp() throws Exception {
@@ -100,21 +84,6 @@ public class CredentialsServletIT {
 		verify(usersDatabase).update(u);
 		verifySetUserAttributes(request, firstname, lastname, address, email);
 		verify(requestDispatcher).include(request, response);
-	}
-
-	private void verifySetUserAttributes(HttpServletRequest request, String firstname, String lastname, String address,
-			String email) {
-		verify(request).setAttribute("firstname", firstname);
-		verify(request).setAttribute("lastname", lastname);
-		verify(request).setAttribute("address", address);
-		verify(request).setAttribute("email", email);
-
-	}
-	
-	private void setSession(String username, String password) {
-		when(request.getSession()).thenReturn(session);
-		when(session.getAttribute("username")).thenReturn(username);
-		when(session.getAttribute("password")).thenReturn(password);
 	}
 	
 	private void assertUser(String firstname, String lastname, String address, String email, Users u) {

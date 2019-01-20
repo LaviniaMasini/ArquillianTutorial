@@ -7,11 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -25,6 +22,7 @@ import arquillian.tutorial.entity.Orders;
 import arquillian.tutorial.entity.Products;
 import arquillian.tutorial.entity.Users;
 import arquillian.tutorial.exception.DatabaseException;
+import arquillian.tutorial.helper.AbstractServletTestHelper;
 import arquillian.tutorial.service.IOrdersService;
 import arquillian.tutorial.service.IProductsService;
 import arquillian.tutorial.service.IUsersService;
@@ -32,19 +30,7 @@ import arquillian.tutorial.service.OrdersService;
 import arquillian.tutorial.service.ProductsService;
 import arquillian.tutorial.service.UsersService;
 
-public class HomePageServletIT {
-
-	@Mock
-	private HttpServletRequest request;
-
-	@Mock
-	private HttpServletResponse response;
-
-	@Mock
-	private RequestDispatcher requestDispatcher;
-
-	@Mock
-	private HttpSession session;
+public class HomePageServletIT extends AbstractServletTestHelper {
 
 	@Mock
 	private IProductsDatabase productsDatabase;
@@ -134,12 +120,6 @@ public class HomePageServletIT {
 
 	}
 
-	private void setSession(String username, String password) {
-		when(request.getSession()).thenReturn(session);
-		when(session.getAttribute("username")).thenReturn(username);
-		when(session.getAttribute("password")).thenReturn(password);
-	}
-
 	private void verifySetProductAttributes(HttpServletRequest request, int id, String name, String description,
 			String category, double price) {
 		verify(request).setAttribute("id", id);
@@ -147,15 +127,6 @@ public class HomePageServletIT {
 		verify(request).setAttribute("category", category);
 		verify(request).setAttribute("description", description);
 		verify(request).setAttribute("price", price);
-	}
-
-	private void verifySetUserAttributes(HttpServletRequest request, String firstname, String lastname, String address,
-			String email) {
-		verify(request).setAttribute("firstname", firstname);
-		verify(request).setAttribute("lastname", lastname);
-		verify(request).setAttribute("address", address);
-		verify(request).setAttribute("email", email);
-
 	}
 
 	private void setProduct(String idStr, String name, String description, String category, double price) {

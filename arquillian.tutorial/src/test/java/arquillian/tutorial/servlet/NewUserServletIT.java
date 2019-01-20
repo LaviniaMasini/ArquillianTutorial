@@ -5,11 +5,7 @@ import static org.mockito.Mockito.*;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,27 +15,16 @@ import org.mockito.MockitoAnnotations;
 import arquillian.tutorial.database.IUsersDatabase;
 import arquillian.tutorial.entity.Users;
 import arquillian.tutorial.exception.DatabaseException;
+import arquillian.tutorial.helper.AbstractServletTestHelper;
 import arquillian.tutorial.service.IUsersService;
 import arquillian.tutorial.service.UsersService;
 
-public class NewUserServletIT {
+public class NewUserServletIT extends AbstractServletTestHelper {
 
 	@Mock
 	private IUsersDatabase usersDatabase;
 
 	private IUsersService usersService;
-
-	@Mock
-	private HttpServletRequest request;
-
-	@Mock
-	private HttpServletResponse response;
-
-	@Mock
-	private RequestDispatcher requestDispatcher;
-
-	@Mock
-	private HttpSession session;
 
 	@Before
 	public void setUp() throws Exception {
