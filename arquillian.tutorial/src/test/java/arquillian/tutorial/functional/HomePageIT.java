@@ -2,14 +2,11 @@ package arquillian.tutorial.functional;
 
 import static org.junit.Assert.*;
 
-import java.net.URL;
 import java.time.LocalDate;
 
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
-import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.Filters;
 import org.jboss.shrinkwrap.api.GenericArchive;
@@ -20,22 +17,15 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import arquillian.tutorial.database.ProductsDatabase;
 import arquillian.tutorial.entity.Products;
 import arquillian.tutorial.exception.DatabaseException;
+import arquillian.tutorial.helper.AbstractFunctionalTestHelper;
 import arquillian.tutorial.service.ProductsService;
 
 @RunWith(Arquillian.class)
-public class HomePageIT {
-	
-	@Drone
-	private WebDriver browser;
-	@ArquillianResource
-	private URL url;
-	
-	private static final String WEBAPP_SRC = "src/main/webapp";
+public class HomePageIT extends AbstractFunctionalTestHelper{
 
 	@Deployment(testable = false)
 	public static Archive<?> createDeployment() {
@@ -119,10 +109,6 @@ public class HomePageIT {
 		assertEquals(lastname, browser.findElement(By.id("lastname")).getText());
 		assertEquals(address, browser.findElement(By.id("address")).getText());
 		assertEquals(email, browser.findElement(By.id("email")).getText());
-	}
-	
-	private void buildURL(String path) {
-		browser.get(url.toExternalForm().replaceAll(path, "").concat("arquillian.tutorial/"));
 	}
 
 }
