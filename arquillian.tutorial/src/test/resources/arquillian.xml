@@ -9,4 +9,9 @@ http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
 			<property name="jbossHome">${JBOSS_HOME}</property>
 		</configuration>
 	</container>
+
+	<extension qualifier="webdriver">
+		<property name="browser">${browser}</property>
+	</extension>
+
 </arquillian>
