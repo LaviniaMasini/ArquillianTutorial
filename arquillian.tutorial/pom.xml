@@ -25,6 +25,15 @@
 		<!-- Sonar coverage -->
 		<sonar.language>java</sonar.language>
 		<sonar.jacoco.reportPaths>${jacoco.data.file}</sonar.jacoco.reportPaths>
+		<sonar.issue.ignore.multicriteria>e11</sonar.issue.ignore.multicriteria>
+		<sonar.issue.ignore.multicriteria.e11.ruleKey>
+			squid:S1989
+		</sonar.issue.ignore.multicriteria.e11.ruleKey>
+		<sonar.issue.ignore.multicriteria.e11.resourceKey>
+			**/*.java
+		</sonar.issue.ignore.multicriteria.e11.resourceKey>
+		<!-- browser for Functional Tests -->
+		<browser.property>chrome</browser.property>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -92,6 +101,13 @@
 			<version>1.0.0.Alpha9</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.jboss.arquillian.graphene</groupId>
+			<artifactId>graphene-webdriver</artifactId>
+			<version>2.3.2</version>
+			<type>pom</type>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
@@ -101,6 +117,13 @@
 				<version>1.4.1.Final</version>
 				<scope>import</scope>
 				<type>pom</type>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.arquillian.extension</groupId>
+				<artifactId>arquillian-drone-bom</artifactId>
+				<version>2.5.1</version>
+				<type>pom</type>
+				<scope>import</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -139,6 +162,7 @@
 					<argLine>${failsafeArgLine}</argLine>
 					<systemPropertyVariables>
 						<JBOSS_HOME>${jboss.property}</JBOSS_HOME>
+						<browser>${browser.property}</browser>
 					</systemPropertyVariables>
 				</configuration>
 			</plugin>
