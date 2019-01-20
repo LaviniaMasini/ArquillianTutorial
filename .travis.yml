@@ -3,10 +3,13 @@ jdk: oraclejdk8
 sudo: true
 install: true
 addons:
+  chrome: stable
   sonarcloud:
     organization: laviniamasini-github
     token:
       secure: KI4CkkHA9hY65KQzPqM+Ou13zi3atmgSn2GHebfay4FEpGq663UhFg5xsN2W4Y6x2plooCigDc1Lls0vYZDTuz0kz7WYne1Cv5mg5obXwCzUXd95KMSUY9lELSBDtV1qG3MSGyApcI4nXtUvveZ7c7uWGSZfcGNzAKo2QcEk0PKqR7pfj81rVvK/FpaP7pHy5sFUBWN6q46vtbyhKi6km9KaIyxgSNM3QoX98Cdjey1C61wEADpqgTe+Va29Mzd0TcRvPNjWDvF8JnfnCLVOooexrh6ALVZq21BtKphThmEtCwZ1IjhMXye92kBS33qlm/O0dcxKyWZoSpHVIIq3UYa3A42OA3zvpmWVYTyTbSBo7zAnYSb4s9KIaTTC6oH+eP0PqhMQsQU2h5aiGvkzTQ5PLM/YoUYHyTONHFByPNK19E58uRmIS5BkCm4hJBdny1U7YJhfsjMSQPe5Xz4ymLOoZaXT8ZQ105yAK3/9whApgBVWD2a0twdM6TCFZsY9NR96XlIhSvKqaQpvywTXe4QTYZz1ou8gZ+mlEdW7H9TlEdoc9Y0Qvxz6+N1WDdfkq0q6KF0DNse1KIa53wtQUJG7w0AcVGFeDLdF7uz7ZZoecaGU6/1OOTCNoQfzsMUo2UcnGHy89QmRXR70I9cGoB4+5i9aF//Y3UMBG1Ogoo8=
+before_install:
+- google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
 services:
 - docker
 env:
@@ -20,6 +23,9 @@ cache:
   - $JBOSS_HOME
   - $HOME/.sonar/cache
 before_script:
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+- sleep 3
 - bash scripts/script.sh
 script:
 - mvn -f arquillian.tutorial/pom.xml clean verify -Parquillian-wildfly-managed,jacoco coveralls:report
