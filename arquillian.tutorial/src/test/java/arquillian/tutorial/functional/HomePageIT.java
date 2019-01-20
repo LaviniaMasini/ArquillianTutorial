@@ -31,11 +31,11 @@ import arquillian.tutorial.service.ProductsService;
 public class HomePageIT {
 	
 	@Drone
-	protected WebDriver browser;
+	private WebDriver browser;
 	@ArquillianResource
-	protected URL url;
+	private URL url;
 	
-	protected static final String WEBAPP_SRC = "src/main/webapp";
+	private static final String WEBAPP_SRC = "src/main/webapp";
 
 	@Deployment(testable = false)
 	public static Archive<?> createDeployment() {
