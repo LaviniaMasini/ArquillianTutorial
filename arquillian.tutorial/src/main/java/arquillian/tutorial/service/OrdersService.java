@@ -15,7 +15,7 @@ import arquillian.tutorial.exception.DatabaseException;
 public class OrdersService implements IOrdersService {
 
 	private IOrdersDatabase ordersDatabase;
-	
+
 	private static final Logger LOGGER = Logger.getLogger(OrdersService.class);
 
 	@Override
