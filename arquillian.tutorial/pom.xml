@@ -270,7 +270,7 @@
 		<profile>
 			<id>arquillian-wildfly-managed</id>
 			<activation>
-				<activeByDefault>true</activeByDefault>
+				<activeByDefault>false</activeByDefault>
 			</activation>
 			<dependencies>
 				<dependency>
@@ -324,7 +324,7 @@
 		<profile>
 			<id>arquillian-wildfly-remote</id>
 			<activation>
-				<activeByDefault>false</activeByDefault>
+				<activeByDefault>true</activeByDefault>
 			</activation>
 			<dependencies>
 				<dependency>
@@ -351,9 +351,10 @@
 								<phase>pre-integration-test</phase>
 								<configuration>
 									<jbossHome>${jboss.property}</jbossHome>
+									<username>admin</username>
+									<password>admin</password>
 								</configuration>
 								<goals>
-									<goal>start</goal>
 									<goal>deploy</goal>
 								</goals>
 							</execution>
@@ -362,6 +363,8 @@
 								<phase>post-integration-test</phase>
 								<configuration>
 									<jbossHome>${jboss.property}</jbossHome>
+									<username>admin</username>
+									<password>admin</password>
 								</configuration>
 								<goals>
 									<goal>undeploy</goal>
