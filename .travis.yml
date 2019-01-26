@@ -13,7 +13,7 @@ before_install:
 services:
 - docker
 install:
-- docker -compose up
+- docker-compose up
 env:
   global:
   - WF_VERSION="14.0.1.Final"
