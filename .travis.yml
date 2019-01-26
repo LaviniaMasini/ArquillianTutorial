@@ -12,15 +12,9 @@ before_install:
 - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
 services:
 - docker
-env:
-  global:
-  - WF_VERSION="14.0.1.Final"
-  - JBOSS_HOME=$HOME/wildfly-$WF_VERSION
-  - WF_LINK="http://download.jboss.org/wildfly/$WF_VERSION/wildfly-$WF_VERSION.tar.gz"
 cache:
   directories:
   - $HOME/.m2
-  - $JBOSS_HOME
   - $HOME/.sonar/cache
 before_script:
 - docker-compose up -d
@@ -31,5 +25,3 @@ before_script:
 script:
 - mvn -f arquillian.tutorial/pom.xml clean verify -Parquillian-wildfly-remote,jacoco coveralls:report
 - mvn -f arquillian.tutorial/pom.xml clean verify -Parquillian-wildfly-remote,jacoco sonar:sonar
-- mvn -f arquillian.tutorial/pom.xml clean verify -Parquillian-wildfly-managed,jacoco coveralls:report
-- mvn -f arquillian.tutorial/pom.xml clean verify -Parquillian-wildfly-managed,jacoco sonar:sonar

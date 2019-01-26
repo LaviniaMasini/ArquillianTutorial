@@ -368,7 +368,6 @@
 								</configuration>
 								<goals>
 									<goal>undeploy</goal>
-									<goal>shutdown</goal>
 								</goals>
 							</execution>
 						</executions>
