@@ -29,7 +29,7 @@ before_script:
 - sleep 3
 - bash scripts/script.sh
 script:
-- mvn -f arquillian.tutorial/pom.xml clean verify -Parquillian-wildfly-managed,jacoco coveralls:report
-- mvn -f arquillian.tutorial/pom.xml clean verify -Parquillian-wildfly-managed,jacoco sonar:sonar
 - mvn -f arquillian.tutorial/pom.xml clean verify -Parquillian-wildfly-remote,jacoco coveralls:report
 - mvn -f arquillian.tutorial/pom.xml clean verify -Parquillian-wildfly-remote,jacoco sonar:sonar
+- mvn -f arquillian.tutorial/pom.xml clean verify -Parquillian-wildfly-managed,jacoco coveralls:report
+- mvn -f arquillian.tutorial/pom.xml clean verify -Parquillian-wildfly-managed,jacoco sonar:sonar
