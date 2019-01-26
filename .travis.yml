@@ -12,6 +12,8 @@ before_install:
 - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
 services:
 - docker
+install:
+- docker -compose up
 env:
   global:
   - WF_VERSION="14.0.1.Final"
@@ -30,3 +32,5 @@ before_script:
 script:
 - mvn -f arquillian.tutorial/pom.xml clean verify -Parquillian-wildfly-managed,jacoco coveralls:report
 - mvn -f arquillian.tutorial/pom.xml clean verify -Parquillian-wildfly-managed,jacoco sonar:sonar
+- mvn -f arquillian.tutorial/pom.xml clean verify -Parquillian-wildfly-remote,jacoco coveralls:report
+- mvn -f arquillian.tutorial/pom.xml clean verify -Parquillian-wildfly-remote,jacoco sonar:sonar
