@@ -1,11 +1,9 @@
-# Base image: Wildfly 15.0.1 with 8080 port exposed
-FROM jboss/wildfly:15.0.1.Final
+# Base image: Wildfly latest version with 8080 port exposed
+FROM jboss/wildfly:latest
 
-# Open management port
 EXPOSE 9990
 EXPOSE 8787
 
-# Add management user with password
 RUN /opt/jboss/wildfly/bin/add-user.sh admin admin --silent
 
 # Set the default command to run on boot

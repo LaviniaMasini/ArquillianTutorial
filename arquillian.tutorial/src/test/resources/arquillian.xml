@@ -10,17 +10,18 @@ http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
 		</configuration>
 	</container>
 
+	<container qualifier="arquillian-wildfly-remote"
+		default="true">
+		<configuration>
+			<property name="managementAddress">localhost</property>
+			<property name="managementPort">9990</property>
+			<property name="username">admin</property>
+			<property name="password">admin</property>
+		</configuration>
+	</container>
+
 	<extension qualifier="webdriver">
 		<property name="browser">${browser}</property>
 	</extension>
-	
-<container qualifier="arquillian-wildfly-remote" default="true">
-	<configuration>
-		<property name="managementAddress">localhost</property>
-		<property name="managementPort">9990</property>
-		<property name="username">admin</property>
-		<property name="password">admin</property>			
-	</configuration>
-</container>
 
 </arquillian>
