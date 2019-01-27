@@ -7,6 +7,14 @@
 </head>
 <body>
 	<jsp:include page="menu.jsp" />
+	<%
+		if (request.getAttribute("errorMessage") != null) {
+	%>
+	<label class="error" id="error"><%=request.getAttribute("errorMessage")%>
+	</label>
+	<%
+		}
+	%>
 	<div class="card-columns">
 		<c:forEach var="item" items="${list}">
 			<div class="card" style="width: 400px">
