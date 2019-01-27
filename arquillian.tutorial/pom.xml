@@ -13,7 +13,6 @@
 		<java.version>1.8</java.version>
 		<!-- Set this property to JBOSS_HOME environment variable or to wildfly 
 			server source folder -->
-		<jboss.property>${env.JBOSS_HOME}</jboss.property>
 		<taglibs.version>1.2.5</taglibs.version>
 		<jacoco.report.folder>${project.build.directory}/coverage-reports</jacoco.report.folder>
 		<!-- Jacoco properties for Unit Tests -->
@@ -147,26 +146,6 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>3.0.0-M3</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>integration-test</goal>
-							<goal>verify</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<argLine>${failsafeArgLine}</argLine>
-					<systemPropertyVariables>
-						<JBOSS_HOME>${jboss.property}</JBOSS_HOME>
-						<browser>${browser.property}</browser>
-					</systemPropertyVariables>
-				</configuration>
-			</plugin>
-			<plugin>
 				<groupId>org.pitest</groupId>
 				<artifactId>pitest-maven</artifactId>
 				<version>1.1.10</version>
@@ -295,9 +274,6 @@
 							<execution>
 								<id>deploy</id>
 								<phase>pre-integration-test</phase>
-								<configuration>
-									<jbossHome>${jboss.property}</jbossHome>
-								</configuration>
 								<goals>
 									<goal>start</goal>
 									<goal>deploy</goal>
@@ -307,9 +283,6 @@
 							<execution>
 								<id>cleanup</id>
 								<phase>post-integration-test</phase>
-								<configuration>
-									<jbossHome>${jboss.property}</jbossHome>
-								</configuration>
 								<goals>
 									<goal>start</goal>
 									<goal>undeploy</goal>
@@ -317,6 +290,26 @@
 								</goals>
 							</execution>
 						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-failsafe-plugin</artifactId>
+						<version>3.0.0-M3</version>
+						<executions>
+							<execution>
+								<goals>
+									<goal>integration-test</goal>
+									<goal>verify</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<argLine>${failsafeArgLine}</argLine>
+							<systemPropertyVariables>
+								<arquillian.launch>arquillian-wildfly-managed</arquillian.launch>
+								<browser>${browser.property}</browser>
+							</systemPropertyVariables>
+						</configuration>
 					</plugin>
 				</plugins>
 			</build>
@@ -350,7 +343,6 @@
 								<id>deploy</id>
 								<phase>pre-integration-test</phase>
 								<configuration>
-									<jbossHome>${jboss.property}</jbossHome>
 									<username>admin</username>
 									<password>admin</password>
 								</configuration>
@@ -362,7 +354,6 @@
 								<id>cleanup</id>
 								<phase>post-integration-test</phase>
 								<configuration>
-									<jbossHome>${jboss.property}</jbossHome>
 									<username>admin</username>
 									<password>admin</password>
 								</configuration>
@@ -371,6 +362,26 @@
 								</goals>
 							</execution>
 						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-failsafe-plugin</artifactId>
+						<version>3.0.0-M3</version>
+						<executions>
+							<execution>
+								<goals>
+									<goal>integration-test</goal>
+									<goal>verify</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<argLine>${failsafeArgLine}</argLine>
+							<systemPropertyVariables>
+								<arquillian.launch>arquillian-wildfly-remote</arquillian.launch>
+								<browser>${browser.property}</browser>
+							</systemPropertyVariables>
+						</configuration>
 					</plugin>
 				</plugins>
 			</build>
