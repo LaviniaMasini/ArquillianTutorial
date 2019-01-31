@@ -33,6 +33,9 @@
 		</sonar.issue.ignore.multicriteria.e11.resourceKey>
 		<!-- browser for Functional Tests -->
 		<browser.property>chrome</browser.property>
+		<!-- Credentials for Wildfly server -->
+		<username.property>admin</username.property>
+		<password.property>admin</password.property>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -343,8 +346,8 @@
 								<id>deploy</id>
 								<phase>pre-integration-test</phase>
 								<configuration>
-									<username>admin</username>
-									<password>admin</password>
+									<username>${username.property}</username>
+									<password>${password.property}</password>
 								</configuration>
 								<goals>
 									<goal>deploy</goal>
@@ -354,8 +357,8 @@
 								<id>cleanup</id>
 								<phase>post-integration-test</phase>
 								<configuration>
-									<username>admin</username>
-									<password>admin</password>
+									<username>${username.property}</username>
+									<password>${password.property}</password>
 								</configuration>
 								<goals>
 									<goal>undeploy</goal>
