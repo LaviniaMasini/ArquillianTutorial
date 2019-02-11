@@ -23,7 +23,5 @@ before_script:
 script:
 - mvn -f arquillian.tutorial/pom.xml clean verify -Parquillian-wildfly-managed,jacoco coveralls:report
 - mvn -f arquillian.tutorial/pom.xml clean verify -Parquillian-wildfly-managed,jacoco sonar:sonar
-- docker-compose up -d
-- mvn -f arquillian.tutorial/pom.xml clean verify -Parquillian-wildfly-remote,jacoco coveralls:report
-- mvn -f arquillian.tutorial/pom.xml clean verify -Parquillian-wildfly-remote,jacoco sonar:sonar
-- docker-compose down
+- mvn -f arquillian.tutorial/pom.xml clean verify -Parquillian-wildfly-remote,fabric8,jacoco coveralls:report
+- mvn -f arquillian.tutorial/pom.xml clean verify -Parquillian-wildfly-remote,fabric8,jacoco sonar:sonar
