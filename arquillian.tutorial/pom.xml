@@ -349,20 +349,6 @@
 									<username>${username.property}</username>
 									<password>${password.property}</password>
 								</configuration>
-								<goals>
-									<goal>deploy</goal>
-								</goals>
-							</execution>
-							<execution>
-								<id>cleanup</id>
-								<phase>post-integration-test</phase>
-								<configuration>
-									<username>${username.property}</username>
-									<password>${password.property}</password>
-								</configuration>
-								<goals>
-									<goal>undeploy</goal>
-								</goals>
 							</execution>
 						</executions>
 					</plugin>
@@ -385,6 +371,77 @@
 								<browser>${browser.property}</browser>
 							</systemPropertyVariables>
 						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>fabric8</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>io.fabric8</groupId>
+						<artifactId>docker-maven-plugin</artifactId>
+						<version>0.28.0</version>
+						<configuration>
+							<images>
+								<image>
+									<name>arquillian</name>
+									<build>
+										<dockerFileDir>${project.basedir}/docker</dockerFileDir>
+										<args>
+											<warFile>arquillian.tutorial.war</warFile>
+										</args>
+										<assembly>
+											<inline>
+												<files>
+													<file>
+														<source>${project.build.directory}/arquillian.tutorial.war</source>
+													</file>
+												</files>
+											</inline>
+										</assembly>
+									</build>
+									<run>
+										<ports>
+											<port>9990:9990</port>
+											<port>8080:8080</port>
+											<port>8787:8787</port>
+										</ports>
+										<wait>
+											<time>50000</time>
+										</wait>
+									</run>
+								</image>
+							</images>
+							<showLogs>true</showLogs>
+						</configuration>
+						<executions>
+							<execution>
+								<id>docker:build</id>
+								<phase>package</phase>
+								<goals>
+									<goal>build</goal>
+								</goals>
+							</execution>
+							<execution>
+								<id>docker:start</id>
+								<phase>pre-integration-test</phase>
+								<goals>
+									<goal>start</goal>
+								</goals>
+							</execution>
+							<execution>
+								<id>docker:stop</id>
+								<phase>post-integration-test</phase>
+								<goals>
+									<goal>stop</goal>
+								</goals>
+							</execution>
+						</executions>
 					</plugin>
 				</plugins>
 			</build>
