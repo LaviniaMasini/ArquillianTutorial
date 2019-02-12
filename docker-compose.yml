@@ -1,6 +1,6 @@
 version: '2'
 services:
-  arquillian:
+  arquillian_tutorial:
     build: .
     ports:
       - "8080:8080"
